@@ -23,7 +23,7 @@ def _chosen_db(db_type=None, debug=False):
     db_config = config.get_database_config()
 
     if db_type is None:
-        db_type = db_config['chosen_db']
+        db_type = db_config['db_type']
     elif db_type not in db_config:
         db_type = 'sqlite'
 
