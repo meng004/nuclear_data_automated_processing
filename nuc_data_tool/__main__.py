@@ -64,9 +64,9 @@ def main_cli():
 @main_cli.command()
 @click.option('--path', '-p',
               'path',
-              default=config.get_file_path('test_file_path'),
+              default=config.get_file_path('out_file_path'),
               type=click.Path(),
-              help='输出文件路径，默认读取配置文件中的路径')
+              help='out文件路径，默认读取配置文件中的out_file_path路径')
 @click.option('--physical_quantities', '-pq',
               'physical_quantities',
               default=all_physical_quantity_list,
@@ -108,7 +108,7 @@ def pop(path,
               'result_path',
               default=config.get_file_path('result_file_path'),
               type=click.Path(),
-              help='输出文件路径，默认读取配置文件中的路径')
+              help='输出文件路径，默认读取配置文件中的result_file_path路径')
 @click.option('--physical_quantities', '-pq',
               'physical_quantities',
               default=all_physical_quantity_list,
@@ -182,7 +182,7 @@ def extract(filenames,
               'result_path',
               default=config.get_file_path('result_file_path'),
               type=click.Path(),
-              help='输出文件路径，默认读取配置文件中的路径')
+              help='输出文件路径，默认读取配置文件中的result_file_path路径')
 @click.option('--physical_quantities', '-pq',
               'physical_quantities',
               default=[all_physical_quantity_list[0]],
@@ -268,7 +268,7 @@ def compare(reference_file,
               'result_path',
               default=config.get_file_path('result_file_path'),
               type=click.Path(),
-              help='输出文件路径，默认读取配置文件中的路径')
+              help='输出文件路径，默认读取配置文件中的result_file_path路径')
 @click.option('--model_type', '-mt',
               'model_type',
               default='iforest',
