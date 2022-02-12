@@ -10,7 +10,7 @@
 
 # Description
 
-This automated post-processing tool uses on output files of code NUIT. The latter is a nuclide depletion calculation program, one essential component of the software package PANGU. They both support the nuclear reactor engineering design of the world's first HGTR made in china.  
+This automated post-processing tool works on output files of code NUIT. The latter is a nuclide depletion calculation program, one essential component of the software package PANGU. They both support the nuclear reactor engineering design of the world's first HGTR made in china.  
 
 ## Demo
 
