@@ -44,7 +44,7 @@ You can refer these two example `docker-compose` [files](https://github.com/book
 
 ### Install nuc-tool
 
-* Local install (recommand)
+* Local install (recommend)
   
 You can complete job after downloading the release package.
 
