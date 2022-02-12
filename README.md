@@ -46,19 +46,19 @@ You can refer these two example `docker-compose` [files](https://github.com/book
 
 * Local install (recommend)
   
-You can complete job after downloading the release package.
+    You can complete job after downloading the release package.
 
-```bash
-pip install nuc-data-tool-4.1.1.tar.gz
-```
+    ```bash
+    pip install nuc-data-tool-4.1.1.tar.gz
+    ```
 
 * Remote install
 
-Also, you can finish job by PyPI:
+    Also, you can finish job by PyPI:
 
-```bash
-pip install nuc-data-tool
-```
+    ```bash
+    pip install nuc-data-tool
+    ```
 
 The tool is supported on Python 3.8 and above.  
 And it is supported on postgresql(>= 13), mysql(>= 8.0)
@@ -74,6 +74,7 @@ And it is supported on postgresql(>= 13), mysql(>= 8.0)
 
     ```bash
     > nuctool pop -p out -init 
+
     Usage: python -m nuctool pop -p out -init
     ```  
 
@@ -84,6 +85,7 @@ And it is supported on postgresql(>= 13), mysql(>= 8.0)
 
     ```bash
     > nuctool extract -p result -n fission_light -all 
+
     Usage: python -m nuctool extract -p result -n fission_light -all
     ```
 
@@ -218,7 +220,7 @@ Options:
                                   核素列表，见配置文件中 nuclide_list ，默认
                                   fission_light
 
-  -all, --all_step                提取中间步骤
+  -all, --all_step                提取中间计算结果
   -m, --merge                     将结果合并输出至一个文件
   --help                          Show this message and exit.
 ```
