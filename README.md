@@ -63,9 +63,12 @@ pip install nuc-data-tool
 The tool is supported on Python 3.8 and above.  
 And it is supported on postgresql(>= 13), mysql(>= 8.0)
 
+***
+
 ### Quick tasks
 
 * Extracting data from output file
+
     Assumption: There is one output file, and it is stored at the directory ***out***.
     The following instruction will extract all physical_quantities of output file while initial database.
 
@@ -75,6 +78,7 @@ And it is supported on postgresql(>= 13), mysql(>= 8.0)
     ```  
 
 * Exporting physical quantities
+
     Assumption: There is one output file stroed in db, and the result export directory is ***result***.
     The following instruction will export all physical_quantities of ***fission_light*** nuclide group with all of  intermediate calculation results into excel format file.
 
@@ -82,6 +86,8 @@ And it is supported on postgresql(>= 13), mysql(>= 8.0)
     > nuctool extract -p result -n fission_light -all 
     Usage: python -m nuctool extract -p result -n fission_light -all
     ```
+
+***
 
 ## How to use
 
