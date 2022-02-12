@@ -1,4 +1,5 @@
 # Nuclear Data Automated Processing
+
 [![Code Quality Score](https://www.code-inspector.com/project/22276/score/svg)](https://frontend.code-inspector.com/public/project/22276/nuclear_data_automated_processing/dashboard)
 [![Code Quality Grade](https://www.code-inspector.com/project/22276/status/svg)](https://frontend.code-inspector.com/public/project/22276/nuclear_data_automated_processing/dashboard)
 [![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/bookyue/nuclear_data_automated_processing)](https://lgtm.com/projects/g/bookyue/nuclear_data_automated_processing)
@@ -7,14 +8,19 @@
 ![example workflow](https://github.com/bookyue/nuclear_data_automated_processing/actions/workflows/build_and_release.yml/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/bookyue/nuclear_data_automated_processing)](https://github.com/bookyue/nuclear_data_automated_processing/blob/main/LICENSE)
 
-An automated processing tool for specific nuclear data.  
+# Description
+
+This automated post-processing tool uses on output files of code NUIT. The latter is a nuclide depletion calculation program, one essential component of the software package PANGU. They both support the nuclear reactor engineering design of the world's first HGTR made in china.  
 
 ## Demo
+
 [![asciicast](https://asciinema.org/a/NgX9tzRrKbCgTe8XDmYE6xG8N.svg)](https://asciinema.org/a/NgX9tzRrKbCgTe8XDmYE6xG8N)
 
 ## Installation
+
 ### Dependencies
-nuc_tool requires:
+
+requires:
 
 * SQLAlchemy (>= 1.4.11)  
 * pandas (>= 1.2.4)  
@@ -29,6 +35,7 @@ nuc_tool requires:
 ***
 
 ### Set up a database
+
 nuc-tool supports 3 different database servers and is officially supported with PostgreSQL, MySQL, and SQLite.  
 If you’re using PostgreSQL, you’ll need the psycopg2 package.  
 If you’re using MySQL or MariaDB, you’ll need a DB API driver like mysql-connector-python.  
@@ -37,7 +44,17 @@ You can refer these two example `docker-compose` [files](https://github.com/book
 
 ### Install nuc-tool
 
-You can install the Nuclear Data Automated Processing tool from PyPI:
+* Local install
+  
+You can complete job after downloading the release package.
+
+```bash
+pip install nuc-data-tool-4.1.1.tar.gz
+```
+
+* Remote install
+
+Also, you can finish job by PyPI:
 
 ```bash
 pip install nuc-data-tool
@@ -45,6 +62,26 @@ pip install nuc-data-tool
 
 The tool is supported on Python 3.8 and above.  
 And it is supported on postgresql(>= 13), mysql(>= 8.0)
+
+### Quick tasks
+
+* Extracting data from output file
+    Assumption: There is one output file, and it is stored at the directory ***out***.
+    The following instruction will extract all physical_quantities of output file while initial database.
+
+    ```bash
+    > nuctool pop -p out -init 
+    Usage: python -m nuctool pop -p out -init
+    ```  
+
+* Exporting physical quantities
+    Assumption: There is one output file stroed in db, and the result export directory is ***result***.
+    The following instruction will export all physical_quantities of ***fission_light*** nuclide group with all of  intermediate calculation results into excel format file.
+
+    ```bash
+    > nuctool extract -p result -n fission_light -all 
+    Usage: python -m nuctool extract -p result -n fission_light -all
+    ```
 
 ## How to use
 
@@ -57,7 +94,7 @@ The Nuclear Data Automated Processing tool is a command line application, named 
 
 ```bash
 > nuctool --help
-Usage: python -m nuc_data_tool [OPTIONS] COMMAND [ARGS]...
+Usage: python -m nuctool [OPTIONS] COMMAND [ARGS]...
 
   app 命令行
 
@@ -67,20 +104,21 @@ Options:
 
 Commands:
   compare  对文件列表进行两两组合，进行对比，计算并输出对比结果至工作簿(xlsx文件)...
-  extract  从数据库导出选中的文件的数据到工作簿(xlsx文件) 参数为文件列表(默认为所有文件) nuc_data_tool...
+  extract  从数据库导出选中的文件的数据到工作簿(xlsx文件) 参数为文件列表(默认为所有文件) nuctool...
   fetch    获取 文件、物理量信息
   pop      将输出文件(*.xml.out) 的内容填充进数据库
 ```
 
 ### Populate database
+
 ```bash
 > nuctool pop --help
-Usage: python -m nuc_data_tool pop [OPTIONS]
+Usage: python -m nuctool pop [OPTIONS]
 
   将输出文件(*.xml.out) 的内容填充进数据库
 
 Options:
-  -p, --path PATH                 输出文件路径，默认读取配置文件中的路径
+  -p, --path PATH                 out文件路径，见配置文件中 out_file_path
   -pq, --physical_quantities [isotope|radioactivity|absorption|fission|decay_heat|gamma_spectra]
                                   物理量，默认为全部物理量
   -init, --initiation             初始化数据库
@@ -106,9 +144,10 @@ not found: []
 ```
 
 ### View files and physical quantities
+
 ```bash
 > nuctool fetch --help
-Usage: python -m nuc_data_tool fetch [OPTIONS]
+Usage: python -m nuctool fetch [OPTIONS]
 
   获取 文件、物理量信息
 
@@ -150,26 +189,27 @@ Name: gamma_spectra
 ```
 
 ### Filter and extract data
+
 ```bash
 > nuctool extract --help
-Usage: python -m nuc_data_tool extract [OPTIONS] [FILENAMES]...
+Usage: python -m nuctool extract [OPTIONS] [FILENAMES]...
 
   从数据库导出选中的文件的数据到工作簿(xlsx文件)
 
   参数为文件列表(默认为所有文件)
 
-  nuc_data_tool extract 'homo-case001-006' 'homo-case007-012' 'homo-case013-018'
-  nuc_data_tool extract 'homo-case001-006'
+  nuctool extract 'homo-case001-006' 'homo-case007-012' 'homo-case013-018'
+  nuctool extract 'homo-case001-006'
 
   文件名(没有后缀) 例如：001.xml.out -> 001
   文件名列表 例如： 001 002 003
 
 Options:
-  -p, --result_path PATH          输出文件路径，默认读取配置文件中的路径
+  -p, --result_path PATH          结果文件路径，见配置文件中 result_file_path
   -pq, --physical_quantities [isotope|radioactivity|absorption|fission|decay_heat|gamma_spectra]
                                   物理量，默认为全部物理量
-  -n, --nuclide [decay|fission_light|short_lives]
-                                  核素列表，从配置文件 nuclide_list 项下读取，默认
+  -n, --nuclide [decay|fission_light|short_lives|all]
+                                  核素列表，见配置文件中 nuclide_list ，默认
                                   fission_light
 
   -all, --all_step                提取中间步骤
@@ -186,7 +226,7 @@ We can specify the exported file location with option `-p, --result_path`.
 The option `-pq, --physical_quantities` can be input multiple times. So we could focus on the physical quantities we interest in.  
 Only those physical quantities will be extracted with data.
 
-```
+```bash
 > nuctool extract 'homo-case097-102' 'homo-case139-144' -p result
 
 > ls result
@@ -214,16 +254,17 @@ all_steps_final.xlsx  final.xlsx
 ```
 
 ### Compare and extract data
+
 ```bash
 > nuctool compare --help
-Usage: python -m nuc_data_tool compare [OPTIONS] REFERENCE_FILE
+Usage: python -m nuctool compare [OPTIONS] REFERENCE_FILE
                                        [COMPARISON_FILES]...
 
   对文件列表进行两两组合，进行对比，计算并输出对比结果至工作簿(xlsx文件)
   第一个参数为基准文件，第二个参数为文件列表(默认为除基准文件以外的所有文件)
 
-  nuc_data_tool compare 'homo-case001-006' 'homo-case007-012' 'homo-case013-018'
-  nuc_data_tool compare 'homo-case001-006'
+  nuctool compare 'homo-case001-006' 'homo-case007-012' 'homo-case013-018'
+  nuctool compare 'homo-case001-006'
 
   文件名(没有后缀) 例如：001.xml.out -> 001
   文件名列表 例如： 001 002 003
@@ -315,7 +356,7 @@ absolute_1.0E-10_UO2Flux_CRAM_1ton_50steps_vs_homo-case007-012.xlsx
 absolute_1.0E-10_UO2Flux_CRAM_1ton_50steps_vs_homo-case013-018.xlsx
 ```
 
-### Import as a package.
+### Import as a package
 
 You can also call the Nuclear Data Automated Processing tool in your own Python code, by importing from the `nuc_data_tool` package:
 
